@@ -19,6 +19,15 @@ class LinkedList
 
     end
 
+    def prepend(value)
+        if head.nil?
+            self.head = Node.new(value, nil)
+        else
+            old_head = head 
+            self.head = Node.new(value, old_head)
+        end
+    end
+
     def find(value)
         node = self.head
         while(!node.nil?)
@@ -28,6 +37,27 @@ class LinkedList
             node = node.nextNode
         end
         false
+    end
+
+    def remove(value)
+        return if head.nil?
+
+
+        node = head
+        prev_node = nil 
+        until(node.nil?)
+            if(node.value == value)
+                if !prev_node.nil? 
+                    prev_node.nextNode = node.nextNode
+                    return 
+                else
+                    self.head = node 
+                    return
+                end
+            end
+            prev_node = node 
+            node = node.nextNode
+        end
     end
 
     private
@@ -45,9 +75,5 @@ end
 
 ll = LinkedList.new
 ll.add(10)
-ll.add(20)
-puts ll.head.value
-puts ll.head.nextNode.value
-puts ll.find(10)
-puts ll.find(70)
-puts ll.find(20)
+ll.remove(10)
+puts ll.head
