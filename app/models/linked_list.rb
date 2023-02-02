@@ -19,6 +19,21 @@ class LinkedList
 
     end
 
+    def insert(value, position)
+        new_node = Node.new(value, position)
+        current = @head 
+        current_position = 0
+
+        while current_position < position - 1
+            current = current.nextNode 
+            current_position += 1
+        end
+
+        new_node.nextNode = current.nextNode
+        current.nextNode = new_node
+
+    end
+
     def prepend(value)
         if head.nil?
             self.head = Node.new(value, nil)
@@ -39,25 +54,61 @@ class LinkedList
         false
     end
 
+    # def remove(value)
+    #     return if head.nil?
+
+    #     node = head
+    #     prev_node = nil 
+
+    #     until(node.nil?)
+    #         if(node.value == value)
+    #             if !prev_node.nil? 
+    #                 prev_node.nextNode = node.nextNode
+    #                 return 
+    #             else
+    #                 self.head = node 
+    #                 return
+    #             end
+    #         end
+    #         prev_node = node 
+    #         node = node.nextNode
+    #     end
+    # end
+
     def remove(value)
-        return if head.nil?
+        current = @head
+        if current.value == value 
+            @head = current.nextNode 
 
-
-        node = head
-        prev_node = nil 
-        until(node.nil?)
-            if(node.value == value)
-                if !prev_node.nil? 
-                    prev_node.nextNode = node.nextNode
-                    return 
-                else
-                    self.head = node 
-                    return
+        else
+            while current.nextNode
+                if current.nextNode.value == value 
+                    current.nextNode = current.nextNode.nextNode
+                    break
                 end
+                current = current.nextNode
             end
-            prev_node = node 
-            node = node.nextNode
         end
+    end
+
+
+    def print_list 
+        current = @head 
+        
+        while current 
+            puts current.value 
+            current = current.nextNode
+        end
+    end
+
+    def to_array
+        current = @head 
+        values = []
+        while current 
+            values << current.value
+            current = current.nextNode
+        end
+        values
     end
 
     private
@@ -75,5 +126,10 @@ end
 
 ll = LinkedList.new
 ll.add(10)
-ll.remove(10)
-puts ll.head
+ll.add(20)
+ll.add(30)
+ll.insert(50, 2)
+ll.remove(30)
+values = ll.to_array
+puts values
+
