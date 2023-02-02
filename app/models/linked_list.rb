@@ -54,27 +54,6 @@ class LinkedList
         false
     end
 
-    # def remove(value)
-    #     return if head.nil?
-
-    #     node = head
-    #     prev_node = nil 
-
-    #     until(node.nil?)
-    #         if(node.value == value)
-    #             if !prev_node.nil? 
-    #                 prev_node.nextNode = node.nextNode
-    #                 return 
-    #             else
-    #                 self.head = node 
-    #                 return
-    #             end
-    #         end
-    #         prev_node = node 
-    #         node = node.nextNode
-    #     end
-    # end
-
     def remove(value)
         current = @head
         if current.value == value 
@@ -89,6 +68,7 @@ class LinkedList
                 current = current.nextNode
             end
         end
+        puts current
     end
 
 
