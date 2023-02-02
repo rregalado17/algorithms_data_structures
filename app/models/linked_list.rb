@@ -68,7 +68,7 @@ class LinkedList
                 current = current.nextNode
             end
         end
-        puts current
+        puts current.value
     end
 
 
