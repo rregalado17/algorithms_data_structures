@@ -16,7 +16,6 @@ class LinkedList
             #we are at the end of the list
             lastNode.nextNode = Node.new(value, nil)
         end
-
     end
 
     def insert(value, position)

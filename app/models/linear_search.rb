@@ -12,4 +12,5 @@ class Linear_Search < ActiveRecord::Base
         return -1
     end
 
+
 end
