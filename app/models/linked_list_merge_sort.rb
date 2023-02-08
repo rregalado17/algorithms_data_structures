@@ -10,25 +10,25 @@ class LinkedListMergeSort
             self.head = Node.new(value, nil)
         else
             lastNode = self.head 
-            while(!lastNode.next.nil?)
-                lastNode = lastNode.next
+            while(!lastNode.nextNode.nil?)
+                lastNode = lastNode.nextNode
             end
             #we are at the end of the list
-            lastNode.next = Node.new(value, nil)
+            lastNode.nextNode = Node.new(value, nil)
         end
     end
 
     def merge_sort
         return self if head.nil? || head.next.nil?
     
-        slow = head
-        fast = head.next
-        while fast && fast.next
-          slow = slow.next
-          fast = fast.next.next
+        firstNode = head
+        lastNode = head.nextNode
+        while lastNode && lastNode.nextNode
+          firstNode = firstNode.nextNode
+          lastNode = lastNode.nextNode.nextNode
         end
-        second = slow.next
-        slow.next = nil
+        second = firstNode.nextNode
+        firstNode.nextNode = nil
     
         left = LinkedList.new(head)
         right = LinkedList.new(second)
@@ -45,20 +45,19 @@ class LinkedListMergeSort
     
         while left.head && right.head
           if left.head.value < right.head.value
-            current.next = left.head
-            left.head = left.head.next
+            current.nextNode = left.head
+            left.head = left.head.nextNode
           else
-            current.next = right.head
-            right.head = right.head.next
+            current.nextNode = right.headNode
+            right.head = right.head.nextNode
           end
-          current = current.next
+          current = current.nextNode
         end
-    
-        current.next = left.head if left.head
-        current.next = right.head if right.head
-    
+        current.nextNode = left.head if left.head
+        current.nextNode = right.head if right.head
+     
         result
-      end
+    end
 
     private
     class Node
@@ -66,7 +65,7 @@ class LinkedListMergeSort
 
         def initialize(value, nextNode)
             self.value = value
-            self.next = next
+            self.nextNode = nextNode
         end
     end
 end
